@@ -1,0 +1,23 @@
+!contents
+
+!**** GETS
+!| smartrics.rest.fitnesse.fixture.RestFixture |http://www.mowa.justtrade.net:8182/tinkergraph/|
+|GET|      /|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="tinkergraph[vertices:6 edges:6]" </pre>-!|
+|GET|      /tp-sample/simple-path/some-work|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.work-came-from="some" </pre>-!|
+| let   | content | js |  response.body | |
+
+!**** POSTs with Json
+
+****!
+!| smartrics.rest.fitnesse.fixture.RestFixture |http://www.mowa.justtrade.net:8182/tinkergraph/|
+|setBody|!- { "resource" : { "name" : "test post", "data" : "some data" } } -!|
+|POST   | /tp-sample/simple-path/some-work/ | 201 | | no-body |
+|POST   | /tp-sample/simple-path/other-work/ | 201 | | no-body |
+|let    | id | header | Location:/resources/(.+) | |
+
+!| smartrics.rest.fitnesse.fixture.RestFixture |http://www.mowa.justtrade.net:8182/tinkergraph/|
+|GET    | /tp-sample/simple-path/some-work | 200 |Content-Type : application/json |!-
+  /resource/name[text()='test post'] <br/>
+  /resource/data[text()='some data']
+-!|
+

@@ -1,0 +1,4 @@
+!contents -R2 -g -p -f -h
+
+This page will test the REST interface of the Rexster sample extensions.
+
