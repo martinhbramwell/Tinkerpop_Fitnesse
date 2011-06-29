@@ -1,7 +1,7 @@
 !contents
 
 !**** GETS
-!| smartrics.rest.fitnesse.fixture.RestFixture|http://www.mowa.justtrade.net:8182/                |
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/                |
 |GET                                          |/|200|Content-Type : application/json;charset=UTF-8|!-<pre>/* javascript */
 function test(json, choice)
 {
@@ -25,7 +25,7 @@ test(jsonbody, "emptygraph");
 !**** Do POSTs with Json
 
 ****!
-!| smartrics.rest.fitnesse.fixture.RestFixture|http://www.mowa.justtrade.net:8182/tinkergraph/                           |
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/tinkergraph/                           |
 |setBody                                      |!- { "resource" : { "name" : "test post", "data" : "some data" } } -!     |
 |POST                                         |/tp-sample/simple-path/some-work/ |201   |                        |no-body|
 |POST                                         |/tp-sample/simple-path/other-work/|201   |                        |no-body|
