@@ -16,30 +16,6 @@
 				<exclude name="**/*.zip"/>
 			</fileset>
 		</copy>
-		
-		<!-- >From ${OPERATIONS_DIR}/FrontPage to ${SCM_DIR}/FrontPage.</echo>
-		<copy todir="${SCM_DIR}/FrontPage">
-			<fileset dir="${OPERATIONS_DIR}/FrontPage">
-				<exclude name="**/*.zip"/>
-			</fileset>
-		</copy -->
-    </target>
-
-    <target name="restore">
-		<echo>Distributing files from SCM staging area to operational directory.</echo>
-		<echo>From ${SCM_DIR}/TinkerPop/HasansKibbles to ${OPERATIONS_DIR}/TinkerPop/HasansKibbles.</echo>
-		<copy todir="${OPERATIONS_DIR}/TinkerPop/HasansKibbles">
-			<fileset dir="${SCM_DIR}/TinkerPop/HasansKibbles">
-				<exclude name="**/*.zip"/>
-			</fileset>
-		</copy>
-		
-		<!-- echo>From ${SCM_DIR}/FrontPage to ${OPERATIONS_DIR}/FrontPage.</echo>
-		<copy todir="${OPERATIONS_DIR}/FrontPage">
-			<fileset dir="${SCM_DIR}/FrontPage">
-				<exclude name="**/*.zip"/>
-			</fileset>
-		</copy -->
     </target>
 
     <target name="collect-top">
@@ -51,18 +27,46 @@
 			</fileset>
 		</copy>
 		
-		<!-- >From ${OPERATIONS_DIR}/FrontPage to ${SCM_DIR}/FrontPage.</echo>
+		<echo>From ${OPERATIONS_DIR}/FrontPage to ${SCM_DIR}/FrontPage.</echo>
 		<copy todir="${SCM_DIR}/FrontPage">
 			<fileset dir="${OPERATIONS_DIR}/FrontPage">
 				<exclude name="**/*.zip"/>
 			</fileset>
-		</copy -->
+		</copy>
+    </target>
+
+    <target name="restore">
+		<echo>Distributing files from SCM staging area to operational directory.</echo>
+		<echo>From ${SCM_DIR}/TinkerPop/HasansKibbles to ${OPERATIONS_DIR}/TinkerPop/HasansKibbles.</echo>
+		<copy todir="${OPERATIONS_DIR}/TinkerPop/HasansKibbles">
+			<fileset dir="${SCM_DIR}/TinkerPop/HasansKibbles">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy>
+    </target>
+
+    <target name="restore-top">
+		<echo>Distributing files from SCM staging area to operational directory.</echo>
+		<echo>From ${SCM_DIR}/TinkerPop to ${OPERATIONS_DIR}/TinkerPop.</echo>
+		<copy todir="${OPERATIONS_DIR}/TinkerPop">
+			<fileset dir="${SCM_DIR}/TinkerPop">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy>
+		
+		<echo>From ${SCM_DIR}/FrontPage to ${OPERATIONS_DIR}/FrontPage.</echo>
+		<copy todir="${OPERATIONS_DIR}/FrontPage">
+			<fileset dir="${SCM_DIR}/FrontPage">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy>
     </target>
 
 	
     <target name="help">
 		<echo>You can do either : 
 - "ant restore" to copy files from here to the Fitnesse working directories : ${OPERATIONS_DIR}
+- "ant restore-top" to copy top-level files from here to the Fitnesse working directories : ${OPERATIONS_DIR}
 - "ant collect" to copy newly edited files from Fitnesse to here : ${SCM_DIR}
 - "ant collect-top" to copy the top-level page with includes and variables to here : ${SCM_DIR}
 		</echo>
