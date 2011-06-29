@@ -1,7 +1,9 @@
 #!/bin/bash
 
 WORKING_DIR=$(pwd)
-FITNESS_ROOT="/etc/fitnesse/FitNesseRoot/"
+# /var/lib/jenkins/jobs/Tinkerpop_Fitnesse/workspace
+
+FITNESS_ROOT="../../StartFitnesse/workspace/FitNesseRoot/"
 
 echo "Collecting into ${WORKING_DIR}"
 cp -r ${FITNESS_ROOT}/FrontPage $WORKING_DIR
