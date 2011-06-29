@@ -22,3 +22,4 @@ test(jsonbody, "neo4jsample");
 |let|content                                      |js |response.body                                |                                                                    |
             href: "tp-sample/ping"
             href: "tp-sample/simple-root"
+

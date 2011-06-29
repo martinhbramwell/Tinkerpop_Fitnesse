@@ -1,0 +1,72 @@
+<project  default="help">
+
+	<property environment="env"/>
+	
+    <property name="SCM_DIR"   value="${basedir}"/>
+    <property name="OPERATIONS_DIR"   value="${env.FITNESSE_ROOT}"/>
+	
+    <!-- property name="SCM_DIR"   value="E:\tmp\trash\scm"/>
+    <property name="OPERATIONS_DIR"   value="E:\tmp\trash\ops"/ -->
+	
+    <target name="collect">
+		<echo>Collecting edited files into SCM staging area</echo>
+		<echo>From ${OPERATIONS_DIR}/TinkerPop/HasansKibbles to ${SCM_DIR}/TinkerPop/HasansKibbles.</echo>
+		<copy todir="${SCM_DIR}/TinkerPop/HasansKibbles">
+			<fileset dir="${OPERATIONS_DIR}/TinkerPop/HasansKibbles">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy>
+		
+		<!-- >From ${OPERATIONS_DIR}/FrontPage to ${SCM_DIR}/FrontPage.</echo>
+		<copy todir="${SCM_DIR}/FrontPage">
+			<fileset dir="${OPERATIONS_DIR}/FrontPage">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy -->
+    </target>
+
+    <target name="restore">
+		<echo>Distributing files from SCM staging area to operational directory.</echo>
+		<echo>From ${SCM_DIR}/TinkerPop/HasansKibbles to ${OPERATIONS_DIR}/TinkerPop/HasansKibbles.</echo>
+		<copy todir="${OPERATIONS_DIR}/TinkerPop/HasansKibbles">
+			<fileset dir="${SCM_DIR}/TinkerPop/HasansKibbles">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy>
+		
+		<!-- echo>From ${SCM_DIR}/FrontPage to ${OPERATIONS_DIR}/FrontPage.</echo>
+		<copy todir="${OPERATIONS_DIR}/FrontPage">
+			<fileset dir="${SCM_DIR}/FrontPage">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy -->
+    </target>
+
+    <target name="collect-top">
+		<echo>Collecting edited files into SCM staging area</echo>
+		<echo>From ${OPERATIONS_DIR}/TinkerPop to ${SCM_DIR}/TinkerPop.</echo>
+		<copy todir="${SCM_DIR}/TinkerPop">
+			<fileset dir="${OPERATIONS_DIR}/TinkerPop">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy>
+		
+		<!-- >From ${OPERATIONS_DIR}/FrontPage to ${SCM_DIR}/FrontPage.</echo>
+		<copy todir="${SCM_DIR}/FrontPage">
+			<fileset dir="${OPERATIONS_DIR}/FrontPage">
+				<exclude name="**/*.zip"/>
+			</fileset>
+		</copy -->
+    </target>
+
+	
+    <target name="help">
+		<echo>You can do either : 
+- "ant restore" to copy files from here to the Fitnesse working directories : ${OPERATIONS_DIR}
+- "ant collect" to copy newly edited files from Fitnesse to here : ${SCM_DIR}
+- "ant collect-top" to copy the top-level page with includes and variables to here : ${SCM_DIR}
+		</echo>
+    </target>
+
+
+</project>
