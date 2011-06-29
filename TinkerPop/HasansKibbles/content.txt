@@ -1,3 +1,10 @@
 !contents -R2 -g -p -f -h
 
-This tests Hasan's various Kibble demos
+This tests Hasan's various Kibble demos.
+
+You'll find variable and include definitions hidden in the parent page .TinkerPop .
+
+
+
+
+                                - o 0 o - 

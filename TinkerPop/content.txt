@@ -1,5 +1,5 @@
 !*> [Variables] 
-!define REST_FIXTURE_INCLUDES_DIR {E:/programs/org/smartrics/RestFixture/dist/artifacts}
+# !define REST_FIXTURE_INCLUDES_DIR {E:/programs/org/smartrics/RestFixture/dist/artifacts}
 # !define REST_FIXTURE_INCLUDES_DIR {/var/lib/jenkins/jobs/BuildRESTFixture/workspace/dist/artifacts}
 *!
 !*> [Includes] 

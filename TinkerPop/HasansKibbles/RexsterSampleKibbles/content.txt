@@ -2,6 +2,8 @@
 
 Run a few sanity checks.  This will give advance warning of infrastructure problems before trying to run more detailed tests.
 
+
+
 !**** GETS
 !| smartrics.rest.fitnesse.fixture.RestFixture|http://www.mowa.justtrade.net:8182/                |
 |GET                                          |/|200|Content-Type : application/json;charset=UTF-8|!-<pre>/* javascript */
