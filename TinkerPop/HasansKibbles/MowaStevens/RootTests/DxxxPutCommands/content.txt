@@ -1,0 +1,10 @@
+!contents
+
+
+!2 PUTs
+!3 File uploads
+Use the multipartFile property to upload files to a server
+
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${TARGET_SERVER}:8182                                                                                                           |
+|setFileName                                    |E:/GitControlled/rexster/extension/example/src/main/resources/data/TheStevens.owl                                                      |
+|PUT                                            |/neo4jsample/mowa/stevens|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["files"]["file_1"][0]["size"]==1581</pre>-!|

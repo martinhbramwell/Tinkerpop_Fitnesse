@@ -1,0 +1,27 @@
+!contents
+
+!2 POSTs
+!3 File uploads
+Use the multipartFile property to upload files to a server
+
+|Action Fixture.                                                                            |
+|start|!-smartrics.rest.test.fitnesse.fixture.FileUtilFixture-!                             |
+|enter|content|!- { "resource" : { "name" : "test post", "data" : "some data" } } -!        |
+|enter|name   |E:/GitControlled/rexster/extension/example/src/main/resources/data/silly.json|
+|check|create |true                                                                         |
+|check|exists |true                                                                         |
+
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${TARGET_SERVER}:8182                                                                                                                                            |
+|setMultipartFileName                           |E:/GitControlled/rexster/extension/example/src/main/resources/data/silly.json                                                                                           |
+|setMultipartFileParameterName                  |silly                                                                                                                                                                   |
+|POST                                           |/neo4jsample/mowa/stevens|200|Content-Type : application/json;charset=UTF-8|!-<pre>(jsonbody.files.file_1[0].name=="silly")&&(jsonbody.files.file_1[0].size==63)</pre>-!|
+
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${TARGET_SERVER}:8182                                                                                                                                                          |
+|setMultipartFileName                           |E:/GitControlled/rexster/extension/example/src/main/resources/data/TheStevens.owl                                                                                                     |
+|setMultipartFileParameterName                  |The Stevens OWL                                                                                                                                                                       |
+|POST                                           |/neo4jsample/mowa/stevens|200|Content-Type : application/json;charset=UTF-8|!-<pre>((jsonbody.files.file_1[0].name=="The Stevens OWL")&&(jsonbody.files.file_1[0].size==1581))</pre>-!|
+
+*Use simple file upload*
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${TARGET_SERVER}:8182                                                                                                           |
+|setFileName                                    |E:/GitControlled/rexster/extension/example/src/main/resources/data/TheStevens.owl                                                      |
+|POST                                           |/neo4jsample/mowa/stevens|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["files"]["file_1"][0]["size"]==1581</pre>-!|

@@ -1,0 +1,11 @@
+!contents
+
+Run a few sanity checks.  This will give advance warning of infrastructure problems before trying to run more detailed tests.
+
+
+
+!**** DELETES
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/                      |
+|DELETE|/neo4jsample/mowa/stevens|200|Content-Type : application/json;charset=UTF-8|jsonbody.behaviour=="DELETE"|
+|let|content                                |js |response.body                                |                                                                                      |
+

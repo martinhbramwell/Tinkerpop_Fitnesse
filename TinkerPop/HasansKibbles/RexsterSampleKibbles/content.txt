@@ -5,7 +5,7 @@ Run a few sanity checks.  This will give advance warning of infrastructure probl
 
 
 !**** GETS
-!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/                |
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVERlocalhost:8182/                      |
 |GET                                          |/|200|Content-Type : application/json;charset=UTF-8|!-<pre>/* javascript */
 function test(json, choice)
 {
@@ -16,12 +16,28 @@ function test(json, choice)
 }
 test(jsonbody, "neo4jsample");
 </pre>-!|
-|GET|/neo4jsample/                                |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="neo4jgraph[EmbeddedGraphDatabase [data\/mowa-graph]]" </pre>-!   |
-|GET|/neo4jsample/tp-sample/simple-path/some-work |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="some"</pre>-!                     |
-|GET|/neo4jsample/tp-sample/simple-path/other-work|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="other"</pre>-!                    |
-|GET|/neo4jsample/tp-sample/ping?reply=ping-a-ling|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.ping=="ping-a-ling"</pre>-!                         |
-|GET|/neo4jsample/tp-sample/simple-root           |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["output"]=="neo4jgraph[EmbeddedGraphDatabase [data\/mowa-graph]]"</pre>-!|
-|let|content                                      |js |response.body                                |                                                                    |
-            href: "tp-sample/ping"
-            href: "tp-sample/simple-root"
+|GET|/neo4jsample/                          |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="neo4jgraph[EmbeddedGraphDatabase [data\/mowa-graph]]" </pre>-!|
+|GET|/neo4jsample/mowa/stevens              |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET graph root"</pre>-!                             |
+|GET|/neo4jsample/mowa/stevens/persons      |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET persons"</pre>-!                                |
+|GET|/neo4jsample/mowa/stevens/relationships|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET relationships"</pre>-!                          |
+|let|content                                |js |response.body                                |                                                                                      |
 
+# !**** POSTS
+# !| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/                                                                                                                         |
+# |POS                                          |/neo4jsample/|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="neo4jgraph[EmbeddedGraphDatabase [data\/mowa-graph]]" </pre>-!|
+
+!**** File uploads
+Use the multipartFile property to upload files to a server
+****!
+|Action Fixture.                                                                                |
+|start|!-smartrics.rest.test.fitnesse.fixture.FileUtilFixture-!                                 |
+|enter|content|!- { "resource" : { "name" : "test post", "data" : "some data" } } -!            |
+|enter|name   |E:/GitControlled/rexster/extension/example/src/main/resources/data/TheStevens.owl|
+|check|create |true                                                                             |
+|check|exists |true                                                                             |
+
+
+Use simple file upload
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${TARGET_SERVERlocalhost:8182                                                     |
+|setFileName                                    |E:/GitControlled/rexster/extension/example/src/main/resources/data/TheStevens.owl|
+|POST                                           |/resources/ |200||{ "resource" : { "name" : "test post", "data" : "some data" } }|

@@ -1,0 +1,20 @@
+!contents
+
+
+!**** GETS
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/                      |
+|GET                                          |/|200|Content-Type : application/json;charset=UTF-8|!-<pre>/* javascript */
+function test(json, choice)
+{
+	for (idx in json.graphs) {
+		if (json.graphs[idx] == choice) return 1==1;
+	}
+	return 1==0;
+}
+test(jsonbody, "neo4jsample");
+</pre>-!|
+|GET|/neo4jsample/                          |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="neo4jgraph[EmbeddedGraphDatabase [data\/mowa-graph]]" </pre>-!|
+|GET|/neo4jsample/mowa/stevens              |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET graph's root"</pre>-!                           |
+|GET|/neo4jsample/mowa/stevens/persons      |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET persons"</pre>-!                                |
+|GET|/neo4jsample/mowa/stevens/relationships|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET relationships"</pre>-!                          |
+|let|content                                |js |response.body                                |                                                                                      |
