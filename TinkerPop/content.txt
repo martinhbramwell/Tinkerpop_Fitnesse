@@ -1,6 +1,10 @@
 !*> [Variables] 
-# !define REST_FIXTURE_INCLUDES_DIR {E:/programs/org/smartrics/RestFixture/dist/artifacts}
+!define REST_FIXTURE_INCLUDES_DIR {E:/programs/org/smartrics/RestFixture/dist/artifacts}
 # !define REST_FIXTURE_INCLUDES_DIR {/var/lib/jenkins/jobs/BuildRESTFixture/workspace/dist/artifacts}
+ 
+!define MOWA_EXTENSION_DATA_DIR {E:/GitControlled/rexster/extension/example/src/main/resources/data}
+# !define MOWA_EXTENSION_DATA_DIR {/var/lib/jenkins/jobs/MOWaRexsterExtension/workspace/rexster/extension/example/src/main/resources/data}
+
 *!
 !*> [Includes] 
 !path ${REST_FIXTURE_INCLUDES_DIR}/RestFixture_fitnesse.jar
