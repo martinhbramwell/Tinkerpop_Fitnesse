@@ -6,6 +6,6 @@ Run a few sanity checks.  This will give advance warning of infrastructure probl
 
 !**** DELETES
 !| smartrics.rest.fitnesse.fixture.RestFixture|http://${REXSTER_TARGET_SERVER}:8182/                      |
-|DELETE|/neo4jsample/mowa/stevens|200|Content-Type : application/json;charset=UTF-8|jsonbody.behaviour=="DELETE"|
+|DELETE|/neo4jsample/mowa/stevens|200|content-type : application/json;charset=UTF-8|jsonbody.behaviour=="DELETE"|
 |let|content                                |js |response.body                                |                                                                                      |
 
