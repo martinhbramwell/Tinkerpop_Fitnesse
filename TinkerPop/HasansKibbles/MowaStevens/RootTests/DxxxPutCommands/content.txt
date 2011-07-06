@@ -5,6 +5,6 @@
 !3 File uploads
 Use the multipartFile property to upload files to a server
 
-|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${TARGET_SERVER}:8182                                                                                                           |
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${REXSTER_TARGET_SERVER}:8182                                                                                                           |
 |setFileName                                    |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                      |
 |PUT                                            |/neo4jsample/mowa/stevens|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["files"]["file_1"][0]["size"]==1581</pre>-!|
