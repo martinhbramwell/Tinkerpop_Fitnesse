@@ -4,24 +4,24 @@
 !3 File uploads
 Use the multipartFile property to upload files to a server
 
-|Action Fixture.                                                                            |
-|start|!-smartrics.rest.test.fitnesse.fixture.FileUtilFixture-!                             |
-|enter|content|!- { "resource" : { "name" : "test post", "data" : "some data" } } -!        |
-|enter|name   |${MOWA_EXTENSION_DATA_DIR}/silly.json|
-|check|create |true                                                                         |
-|check|exists |true                                                                         |
+|Action Fixture.                                                                    |
+|start|!-smartrics.rest.test.fitnesse.fixture.FileUtilFixture-!                     |
+|enter|content|!- { "resource" : { "name" : "test post", "data" : "some data" } } -!|
+|enter|name   |${MOWA_EXTENSION_DATA_DIR}/silly.json                                |
+|check|create |true                                                                 |
+|check|exists |true                                                                 |
 
-|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${REXSTER_TARGET_SERVER}:8182                                                                                                                                            |
-|setMultipartFileName                           |${MOWA_EXTENSION_DATA_DIR}/silly.json                                                                                           |
-|setMultipartFileParameterName                  |silly                                                                                                                                                                   |
-|POST                                           |/neo4jsample/mowa/stevens|200|content-type : application/json;charset=UTF-8|!-<pre>(jsonbody.files.file_1[0].name=="silly")&&(jsonbody.files.file_1[0].size==63)</pre>-!|
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${REXSTER_TARGET_SERVER}:8182                                                                                                                                           |
+|setMultipartFileName                           |${MOWA_EXTENSION_DATA_DIR}/silly.json                                                                                                                                          |
+|setMultipartFileParameterName                  |silly                                                                                                                                                                          |
+|POST                                           |/neo4jsample/mowa/stevens-family|200|content-type : application/json;charset=UTF-8|!-<pre>(jsonbody.files.file_1[0].name=="silly")&&(jsonbody.files.file_1[0].size==63)</pre>-!|
 
-|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${REXSTER_TARGET_SERVER}:8182                                                                                                                                                          |
-|setMultipartFileName                           |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                                                                     |
-|setMultipartFileParameterName                  |The Stevens OWL                                                                                                                                                                       |
-|POST                                           |/neo4jsample/mowa/stevens|200|content-type : application/json;charset=UTF-8|!-<pre>((jsonbody.files.file_1[0].name=="The Stevens OWL")&&((jsonbody.files.file_1[0].size==1581)||(jsonbody.files.file_1[0].size==1524)))</pre>-!|
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${REXSTER_TARGET_SERVER}:8182                                                                                                                                                                                                  |
+|setMultipartFileName                           |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                                                                                                                                                             |
+|setMultipartFileParameterName                  |The Stevens OWL                                                                                                                                                                                                                       |
+|POST                                           |/neo4jsample/mowa/stevens-family|200|content-type : application/json;charset=UTF-8|!-<pre>((jsonbody.files.file_1[0].name=="The Stevens OWL")&&((jsonbody.files.file_1[0].size==1581)||(jsonbody.files.file_1[0].size==1524)))</pre>-!|
 
 *Use simple file upload*
-|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${REXSTER_TARGET_SERVER}:8182                                                                                                           |
-|setFileName                                    |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                      |
-|POST                                           |/neo4jsample/mowa/stevens|200|content-type : application/json;charset=UTF-8|!-<pre>((jsonbody.files.file_1[0].size==1581)||(jsonbody.files.file_1[0].size==1524))</pre>-!|
+|!-smartrics.rest.fitnesse.fixture.RestFixture-!|http://${REXSTER_TARGET_SERVER}:8182                                                                                                                                            |
+|setFileName                                    |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                                                                                                       |
+|POST                                           |/neo4jsample/mowa/stevens-family|200|content-type : application/json;charset=UTF-8|!-<pre>((jsonbody.files.file_1[0].size==1581)||(jsonbody.files.file_1[0].size==1524))</pre>-!|
