@@ -16,5 +16,5 @@ test(jsonbody, "neo4jsample");
 |GET|/neo4jsample/                          |200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="neo4jgraph[EmbeddedGraphDatabase [data\/mowa-graph]]" </pre>-!|
 |GET|/neo4jsample/mowa/stevens              |200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET graph's root"</pre>-!                           |
 |GET|/neo4jsample/mowa/stevens/persons      |200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET persons ***** "</pre>-!                                |
-|GET|/neo4jsample/mowa/stevens/relationships|200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET relationships"</pre>-!                          |
+|GET|/neo4jsample/mowa/stevens/relationships|200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="GET Steven's family relationships"</pre>-!                          |
 |let|content                                |js |response.body                                |                                                                                      |
