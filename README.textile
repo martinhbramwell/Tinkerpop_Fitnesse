@@ -1,0 +1,7 @@
+h1. Fitnesse test for Rexster Extension
+
+This contains the Fitnesse wiki backup
+
+It contains only the content.txt and properties.xml files, since all of the rest are automatic.
+
+See "Setting up a Rexster Extension continuous integration and test server":https://github.com/martinhbramwell/RexExt_ci/wiki
