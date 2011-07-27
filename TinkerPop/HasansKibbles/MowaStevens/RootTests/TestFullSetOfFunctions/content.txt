@@ -16,17 +16,15 @@ test(jsonbody, "neo4jsample");
 
 !2 PUT a file to work with
 Use the PUT method to upload a file to a server
-!| Rest fixture|http://${REXSTER_TARGET_SERVER}:8182/                                                                               |
-|setFileName   |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                                           |
-|PUT           |/neo4jsample/mowa/stevens/|200|content-type : application/json;charset=UTF-8  |!-<pre>jsonbody.filesCount==1</pre>-!|
-|let           |checkIt           |js |response.jsonbody["files"]["file_1"][0]["name"].substring(0,12)|mowa.stevens                                     |
-|let           |$collectionName           |js |response.jsonbody["files"]["file_1"][0]["name"]|                                     |
+!| Rest fixture|http://${REXSTER_TARGET_SERVER}:8182/                                                                                               |
+|setFileName   |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                                                           |
+|PUT           |/neo4jsample/mowa/stevens/|200|content-type : application/json;charset=UTF-8                  |!-<pre>jsonbody.filesCount==1</pre>-!|
+|let           |checkIt                   |js |response.jsonbody["files"]["file_1"][0]["name"].substring(0,12)|mowa.stevens                         |
+|let           |$collectionName           |js |response.jsonbody["files"]["file_1"][0]["name"]                |                                     |
 
 
 
 
 !2 Now delete the file we put
-!| smartrics.rest.fitnesse.fixture.RestFixture|http://${REXSTER_TARGET_SERVER}:8182/                                                                                                         |
-|DELETE                                       |/neo4jsample/mowa/stevens?refVertex=%collectionName%|200|content-type : application/json;charset=UTF-8|(jsonbody.message == null)  && (jsonbody.behaviour=="DELETE record")|
-|let                                          |content                         |js |response.body                                |                                                           |
-
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${REXSTER_TARGET_SERVER}:8182/                                                                                                                            |
+|DELETE                                       |/neo4jsample/mowa/stevens?refVertex=%collectionName%|200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody.behaviour=="DELETEd 17 vertices." </pre>-!|
