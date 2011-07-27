@@ -1,0 +1,32 @@
+!contents
+
+!**** GETS
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/                |
+|GET                                          |/|200|Content-Type : application/json;charset=UTF-8|!-<pre>/* javascript */
+function test(json, choice)
+{
+	for (idx in json.graphs) {
+		if (json.graphs[idx] == choice) return 1==1;
+	}
+	return 1==0;
+}
+test(jsonbody, "emptygraph");
+</pre>-!|
+|GET|/tinkergraph/                                |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="tinkergraph[vertices:6 edges:6]" </pre>-!   |
+|GET|/tinkergraph/tp-sample/simple-path/some-work |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="some"</pre>-!                     |
+|GET|/tinkergraph/tp-sample/simple-path/other-work|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["workCameFrom"]=="other"</pre>-!                    |
+|GET|/tinkergraph/tp-sample/map-config            |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["some-key"]=="some-value"</pre>-!                   |
+|GET|/tinkergraph/tp-sample/ping?reply=ping-a-ling|200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody.ping=="ping-a-ling"</pre>-!                         |
+|GET|/tinkergraph/tp-sample/simple-root           |200|Content-Type : application/json;charset=UTF-8|!-<pre>jsonbody["output"]=="tinkergraph[vertices:6 edges:6]"</pre>-!|
+|let|content                                      |js |response.body                                |                                                                    |
+            href: "tp-sample/ping"
+            href: "tp-sample/simple-root"
+
+!**** Do POSTs with Json
+
+****!
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${TARGET_SERVER}:8182/tinkergraph/                           |
+|setBody                                      |!- { "resource" : { "name" : "test post", "data" : "some data" } } -!     |
+|POST                                         |/tp-sample/simple-path/some-work/ |201   |                        |no-body|
+|POST                                         |/tp-sample/simple-path/other-work/|201   |                        |no-body|
+|let                                          |id                                |header|Location:/resources/(.+)|       |

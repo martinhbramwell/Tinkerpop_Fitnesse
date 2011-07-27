@@ -1,0 +1,32 @@
+!contents
+
+
+|Import                         |
+|smartrics.rest.fitnesse.fixture|
+
+
+!2 Basic GETS of application state guidance information
+!| Rest fixture|http://${REXSTER_TARGET_SERVER}:8182/              |
+|GET           |/|200|content-type : application/json;charset=UTF-8|!-<pre>/* javascript */  function test(json,choice){for(idx in json.graphs){if(json.graphs[idx]==choice)return 1==1;}return 1==0;}
+test(jsonbody, "neo4jsample");
+</pre>-!|
+|GET|/neo4jsample/            |200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody.graph=="neo4jgraph[EmbeddedGraphDatabase [data\/mowa-graph]]" </pre>-!|
+|GET|/neo4jsample/mowa/stevens|200|content-type : application/json;charset=UTF-8|!-<pre>jsonbody["paths"][0]["persons"]["href"]=="mowa/stevens/persons"</pre>-!        |
+
+
+!2 PUT a file to work with
+Use the PUT method to upload a file to a server
+!| Rest fixture|http://${REXSTER_TARGET_SERVER}:8182/                                                                               |
+|setFileName   |${MOWA_EXTENSION_DATA_DIR}/TheStevens.owl                                                                           |
+|PUT           |/neo4jsample/mowa/stevens/|200|content-type : application/json;charset=UTF-8  |!-<pre>jsonbody.filesCount==1</pre>-!|
+|let           |checkIt           |js |response.jsonbody["files"]["file_1"][0]["name"].substring(0,12)|mowa.stevens                                     |
+|let           |$collectionName           |js |response.jsonbody["files"]["file_1"][0]["name"]|                                     |
+
+
+
+
+!2 Now delete the file we put
+!| smartrics.rest.fitnesse.fixture.RestFixture|http://${REXSTER_TARGET_SERVER}:8182/                                                                                                         |
+|DELETE                                       |/neo4jsample/mowa/stevens?refVertex=%collectionName%|200|content-type : application/json;charset=UTF-8|(jsonbody.message == null)  && (jsonbody.behaviour=="DELETE record")|
+|let                                          |content                         |js |response.body                                |                                                           |
+

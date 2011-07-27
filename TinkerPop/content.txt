@@ -1,9 +1,4 @@
-
-!3 This is the top level of all Tinkerpop test suites.
-
-
-Run ''Suite'' on this page and all the suites listed in the ''Contents'' section below will be tested.
-!* Table of Contents
 !contents -R2 -g -p -f -h
-*!
+
+This page will test the REST interface of the Rexster sample extensions.
 
